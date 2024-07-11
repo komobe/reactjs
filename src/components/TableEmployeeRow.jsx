@@ -1,4 +1,26 @@
-const TableEmployeeRow = ({ employee }) => {
+const RowActions = ({ actions }) => {
+  return (
+    <>
+      {actions.map((action) => (
+        <a
+          key={action.id}
+          href={`#${action.href}`}
+          className={action.type === 'delete' ? 'delete' : 'edit'}
+          data-toggle="modal"
+        >
+          <i
+            className="material-icons"
+            data-toggle="tooltip"
+            title={action.title ? action.title : action.label}
+            dangerouslySetInnerHTML={{ __html: action.icon }}
+          />
+        </a>
+      ))}
+    </>
+  );
+};
+
+const TableEmployeeRow = ({ employee, actions }) => {
   return (
     <tr>
       <td>
@@ -11,20 +33,10 @@ const TableEmployeeRow = ({ employee }) => {
       <td>{employee.address}</td>
       <td>{employee.phone}</td>
       <td>
-        <a href={employee.editLink} className="edit" data-toggle="modal">
-          <i className="material-icons" data-toggle="tooltip" title="Edit">
-            &#xE254;
-          </i>
-        </a>
-        <a href={employee.deleteLink} className="delete" data-toggle="modal">
-          <i className="material-icons" data-toggle="tooltip" title="Delete">
-            &#xE872;
-          </i>
-        </a>
+        <RowActions actions={actions} />
       </td>
     </tr>
   );
 };
-
 
 export default TableEmployeeRow;

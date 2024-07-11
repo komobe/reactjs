@@ -1,4 +1,4 @@
-export function EditEmployeeForm({ title }) {
+export default function EditEmployeeForm({ title }) {
   return (
     <form>
       <div className="modal-header">
